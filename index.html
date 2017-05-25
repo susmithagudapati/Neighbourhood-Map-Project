@@ -1,20 +1,38 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <title>Mumbai | Udacity</title>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1.0">
-    <title>Neighbourhood Map</title>
     <link rel="stylesheet" type="text/css" href="static/style.css">
 </head>
 <body>
-    <div class="container">
-        <div id="map"></div>
+    <div class="sidebar-menu">
+        <div class="sidebar-header">
+            <h1>Locations in Mumbai</h1>
+            <div class="places-list">
+                <input class="search-input" placeholder="Search for places" type="text" data-bind="value: query, valueUpdate: 'keyup'">
+            </div>
+            <ul class="places-list" data-bind="template: {name: 'marker', foreach: locations}">
+            </ul>
+        </div>
     </div>
+    <div id="map"></div>
+
+    <script type="text/html" id="marker">
+        <div data-bind="visible: visible">
+                <li data-bind="attr: {id: id}">
+                    <strong data-bind="text: title"></strong>
+                </li>
+        </div>
+    </script>
 
     <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBiVgu3IDJwokTjzXGe-z-iszUlxrlpnpk&v=3&callback=initialize">
     </script>
+
     <script type='text/javascript' src='static/js/knockout-3.4.2.debug.js'></script>
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
     <script type="text/javascript" src="static/js/script.js" ></script>
 </body>
-</html3
+</html>

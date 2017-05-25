@@ -5,9 +5,9 @@ body {
     height: 100%;
 }
 
-.container {
+.sidebar-menu {
     height: 100%;
-    width: 100%;
+    width: 360px;
     position: relative;
 }
 
@@ -17,4 +17,13 @@ body {
     left: 360px;
     right: 0px;
     bottom: 0px;
+}
+
+.search-input {
+    width: 225px;
+    height: 28px;
+    text-align: center;
+    margin-top: 24px;
+    margin-left: 16px;
+    font-size: 18px;
 }
