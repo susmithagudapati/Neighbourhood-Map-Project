@@ -15,8 +15,8 @@ var locations = [
         id: 3
     },
     {
-        title: 'Wankhede stadium',
-        position: {lat: 18.9388993, lng: 72.8257783},
+        title: 'Haji Ali Dargah',
+        position: {lat: 18.982747, lng:72.8089648},
         id: 4
     },
     {
@@ -26,12 +26,17 @@ var locations = [
     }
 ];
 
-var map;
+var map, largeInfowindow;
+var markers = ko.observableArray([]);
+
 function initialize() {
     map = new google.maps.Map(document.getElementById('map'), {
         center: {lat: 19.1493839, lng: 72.9238321},
         zoom: 10
     });
+
+    largeInfowindow = new google.maps.InfoWindow();
+    var bounds = new google.maps.LatLngBounds();
 
     var Marker = function(location) {
         var position = location.position;
@@ -45,14 +50,20 @@ function initialize() {
                         animation: google.maps.Animation.DROP,
                         id: id
                     });
+
+        google.maps.event.addListener(this.marker, 'click', function() {
+            largeInfowindow.setContent('<div>' + this.title + this.position + '</div>');
+            largeInfowindow.open(map, this);
+        });
+        bounds.extend(this.marker.position)
     };
 
     var AppViewModel = function() {
-        var markers = ko.observableArray();
-
         locations.forEach(function(location) {
-            markers.push(new Marker(location));
+            var marker = new Marker(location);
+            markers.push(marker);
         });
+        map.fitBounds(bounds);
     };
 
     ko.applyBindings(new AppViewModel());

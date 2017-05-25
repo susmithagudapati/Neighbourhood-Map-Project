@@ -14,7 +14,7 @@ body {
 #map {
     height: 100%;
     position: absolute;
-    left: 180px;
+    left: 360px;
     right: 0px;
     bottom: 0px;
 }
