@@ -1,3 +1,4 @@
+
 var locations = [
     {
         title: 'IIT Bombay',
@@ -32,56 +33,76 @@ var locations = [
 ];
 
 var map, largeInfowindow;
-var markers = ko.observableArray([]);
+
+var Marker = function(location) {
+    var position = location.position;
+    var title = location.title;
+    var id = location.id;
+
+    this.marker = new google.maps.Marker({
+                    position: position,
+                    map: map,
+                    title: title,
+                    animation: google.maps.Animation.DROP,
+                    id: id
+                });
+
+    google.maps.event.addListener(this.marker, 'click', function() {
+        largeInfowindow.setContent('<div>' + this.title + this.position + '</div>');
+        largeInfowindow.open(map, this);
+    });
+};
+
+
+function AppViewModel() {
+
+    var self = this;
+
+    self.map = null;
+    self.markers = ko.observableArray([]);
+    self.query = ko.observable("");
+    largeInfowindow = new google.maps.InfoWindow();
+
+    self.initMap = function() {
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: {lat: 19.1493839, lng: 72.9238321},
+            zoom: 10,
+        });
+    };
+
+    self.setMarkers = function() {
+        locations.forEach(function(location) {
+            var marker = new Marker(location);
+            self.markers.push(marker);
+        });
+    };
+
+    self.clearMarkers = function() {
+
+    };
+
+    self.searchMarkers = function(){
+
+    };
+}
+
+function googleError() {
+    alert("Failed to load Google Maps API");
+}
+
+var viewModel;
 
 function initialize() {
-    map = new google.maps.Map(document.getElementById('map'), {
-        center: {lat: 19.1493839, lng: 72.9238321},
-        zoom: 10
-    });
 
-    largeInfowindow = new google.maps.InfoWindow();
-    var bounds = new google.maps.LatLngBounds();
+    viewModel = new AppViewModel();
 
-    var Marker = function(location) {
-        var position = location.position;
-        var title = location.title;
-        var id = location.id;
+    viewModel.initMap();
+    viewModel.setMarkers();
 
-        this.marker = new google.maps.Marker({
-                        position: position,
-                        map: map,
-                        title: title,
-                        animation: google.maps.Animation.DROP,
-                        id: id
-                    });
+    ko.applyBindings(viewModel);
+};
 
-        this.infowindow = google.maps.event.addListener(this.marker, 'click', function() {
-            largeInfowindow.setContent('<div>' + this.title + this.position + '</div>');
-            largeInfowindow.open(map, this);
-        });
-        bounds.extend(this.marker.position)
-    };
 
-    locations.forEach(function(location) {
-        var marker = new Marker(location);
-        markers.push(marker);
-    });
 
-    map.fitBounds(bounds);
 
-    var AppViewModel = {
-        markers: markers,
-        query: ko.observable(''),
-    };
 
-    AppViewModel.search = ko.dependentObservable(function() {
-        var self = this;
-        var search = this.query().toLowerCase();
-        return ko.utils.arrayFilter(markers, function(marker) {
-            return marker.title.toLowerCase().indexOf(search) >= 0;
-        });
-    }, AppViewModel);
-
-    ko.applyBindings(AppViewModel);
-}
