@@ -32,7 +32,8 @@ var locations = [
     }
 ];
 
-var map, largeInfowindow;
+var largeInfowindow;
+var map;
 
 var Marker = function(location) {
     var position = location.position;
@@ -58,7 +59,6 @@ function AppViewModel() {
 
     var self = this;
 
-    self.map = null;
     self.markers = ko.observableArray([]);
     self.query = ko.observable("");
     largeInfowindow = new google.maps.InfoWindow();
@@ -66,7 +66,7 @@ function AppViewModel() {
     self.initMap = function() {
         map = new google.maps.Map(document.getElementById('map'), {
             center: {lat: 19.1493839, lng: 72.9238321},
-            zoom: 10,
+            zoom: 10
         });
     };
 
@@ -74,6 +74,15 @@ function AppViewModel() {
         locations.forEach(function(location) {
             var marker = new Marker(location);
             self.markers.push(marker);
+        });
+    };
+
+    self.populateInfoWindow = function() {
+        var marker = self.markers()[this.id - 1].marker;
+        largeInfowindow.setContent('<div>' + marker.title + marker.position + '</div>');
+        largeInfowindow.open(map, marker);
+        largeInfowindow.addListener('closeclick', function() {
+            largeInfowindow.marker = null;
         });
     };
 
@@ -100,7 +109,7 @@ function initialize() {
     viewModel.setMarkers();
 
     ko.applyBindings(viewModel);
-};
+}
 
 
 

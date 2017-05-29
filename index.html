@@ -22,7 +22,7 @@
     <script type="text/html" id="marker">
         <div data-bind="visible: visible">
                 <li data-bind="attr: {id: id}">
-                    <strong data-bind="text: title"></strong>
+                    <strong data-bind="text: title, click: $parent.populateInfoWindow"></strong>
                 </li>
         </div>
     </script>
