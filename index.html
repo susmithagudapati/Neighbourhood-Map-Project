@@ -4,26 +4,32 @@
     <title>Mumbai |Udacity</title>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="static/bootstrap-full.css">
     <link rel="stylesheet" type="text/css" href="static/style.css">
 </head>
 <body>
-    <div class="sidebar-menu">
-        <div class="sidebar-header">
-            <h1>Locations in Mumbai</h1>
-            <div class="search">
-                <input class="search-input" placeholder="Search for places" type="text" data-bind="textInput: query, event: {input: updateList}">
+
+    <div class="content">
+        <section class="locations-container">
+            <div class="sidebar-header">
+                <h1>Locations in Mumbai</h1>
+                <div class="search">
+                    <input class="search-input" placeholder="Search for places" type="text" data-bind="textInput: query, event: {input: updateList}">
+                </div>
             </div>
-        </div>
-        <div class="places-list">
-            <ul data-bind="template: {name: 'marker', foreach: locations}"></ul>
-        </div>
+            <div class="places-list">
+                <ul data-bind="template: {name: 'marker', foreach: locations}"></ul>
+            </div>
+        </section>
+        <section class="map-container">
+            <div id="map"></div>
+        </section>
     </div>
-    <div id="map"></div>
 
     <script type="text/html" id="marker">
         <div data-bind="visible: visible">
                 <li data-bind="attr: {id: id}">
-                    <strong data-bind="text: title, click: $parent.populateInfoWindow"></strong>
+                    <strong class="location-name" data-bind="text: title, click: $parent.populateInfoWindow"></strong>
                 </li>
         </div>
     </script>

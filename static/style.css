@@ -1,21 +1,28 @@
-html,
-body {
+* {
     margin: 0;
     padding: 0;
+}
+
+html,
+body {
     height: 100%;
 }
 
-.sidebar-menu {
+.content {
     height: 100%;
-    width: 360px;
-    position: relative;
     background-color: black;
+}
+
+.locations-container {
+    height: 100%;
+    width: 320px;
+    position: relative;
 }
 
 #map {
     height: 100%;
     position: absolute;
-    left: 360px;
+    left: 320px;
     right: 0px;
     bottom: 0px;
 }
@@ -23,21 +30,21 @@ body {
 h1 {
     color: white;
     margin: auto;
-    padding: 15px;
+    padding: 30px 15px;
+    font-size: 28px;
 }
 
 .search-input {
     width: 225px;
     height: 28px;
     text-align: center;
-    margin-top: 24px;
-    margin-left: 16px;
     font-size: 18px;
+    margin-left: 20px;
 }
 
 .places-list {
-    font-size: 18px;
+    font-size: 16px;
     color: white;
-    margin: 10px;
-    padding-top: 10px;
+    margin-left: 25px;
+    margin-top: 20px;
 }
