@@ -28,7 +28,55 @@ var locations = [
         position: {lat: 19.0895595, lng: 72.8656144},
         visible: ko.observable(true),
         id: 5
-    }
+    },
+    {
+        title: 'Elephanta Caves',
+        position: {lat: 18.9633474, lng: 72.9314864},
+        visible: ko.observable(true),
+        id: 6
+    },
+    {
+        title: 'Sanjay Gandhi National Park',
+        position: {lat: 19.2210347, lng: 72.9067922},
+        visible: ko.observable(true),
+        id: 7
+    },
+    {
+        title: 'Siddhivinayak Temple',
+        position: {lat: 19.0168986, lng: 72.8303439},
+        visible: ko.observable(true),
+        id: 8
+    },
+    {
+        title: 'Essel World',
+        position: {lat: 19.2327242, lng: 72.8055083},
+        visible: ko.observable(true),
+        id: 9
+    },
+    {
+        title: 'Babulnath Temple',
+        position: {lat: 18.9592844, lng: 72.8087115},
+        visible: ko.observable(true),
+        id: 10
+    },
+    {
+        title: 'Powai Lake',
+        position: {lat: 19.1265972, lng: 72.90619029999999},
+        visible: ko.observable(true),
+        id: 11
+    },
+    {
+        title: 'Jahenger Art Gallery',
+        position: {lat: 18.9274559, lng: 72.83170299999999},
+        visible: ko.observable(true),
+        id: 12
+    },
+    {
+        title: 'Navi Mumbai',
+        position: {lat: 19.0330488, lng: 73.0296625},
+        visible: ko.observable(true),
+        id: 13
+    },
 ];
 
 var largeInfowindow;
@@ -66,7 +114,7 @@ function AppViewModel() {
     self.initMap = function() {
         map = new google.maps.Map(document.getElementById('map'), {
             center: {lat: 19.1493839, lng: 72.9238321},
-            zoom: 10
+            zoom: 11
         });
     };
 
