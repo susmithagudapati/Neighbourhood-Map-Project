@@ -9,6 +9,7 @@ body {
     height: 100%;
     width: 360px;
     position: relative;
+    background-color: black;
 }
 
 #map {
@@ -19,6 +20,12 @@ body {
     bottom: 0px;
 }
 
+h1 {
+    color: white;
+    margin: auto;
+    padding: 15px;
+}
+
 .search-input {
     width: 225px;
     height: 28px;
@@ -26,4 +33,11 @@ body {
     margin-top: 24px;
     margin-left: 16px;
     font-size: 18px;
+}
+
+.places-list {
+    font-size: 18px;
+    color: white;
+    margin: 10px;
+    padding-top: 10px;
 }

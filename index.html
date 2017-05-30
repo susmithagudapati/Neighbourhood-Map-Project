@@ -10,11 +10,12 @@
     <div class="sidebar-menu">
         <div class="sidebar-header">
             <h1>Locations in Mumbai</h1>
-            <div class="places-list">
+            <div class="search">
                 <input class="search-input" placeholder="Search for places" type="text" data-bind="textInput: query, event: {input: updateList}">
             </div>
-            <ul class="places-list" data-bind="template: {name: 'marker', foreach: locations}">
-            </ul>
+        </div>
+        <div class="places-list">
+            <ul data-bind="template: {name: 'marker', foreach: locations}"></ul>
         </div>
     </div>
     <div id="map"></div>
