@@ -1,4 +1,3 @@
-
 var locations = [
     {
         title: 'IIT Bombay',
@@ -44,7 +43,7 @@ var Marker = function(location) {
                     position: position,
                     map: map,
                     title: title,
-                    animation: google.maps.Animation.DROP,
+                    animation: null,
                     id: id
                 });
 
@@ -61,19 +60,13 @@ function AppViewModel() {
 
     self.markers = ko.observableArray([]);
     self.query = ko.observable("");
+    self.results = ko.observableArray([]);
     largeInfowindow = new google.maps.InfoWindow();
 
     self.initMap = function() {
         map = new google.maps.Map(document.getElementById('map'), {
             center: {lat: 19.1493839, lng: 72.9238321},
             zoom: 10
-        });
-    };
-
-    self.setMarkers = function() {
-        locations.forEach(function(location) {
-            var marker = new Marker(location);
-            self.markers.push(marker);
         });
     };
 
@@ -86,12 +79,34 @@ function AppViewModel() {
         });
     };
 
-    self.clearMarkers = function() {
-
+    self.filterLocations = function() {
+        var results = [];
+        var query = self.query().toLowerCase();
+        locations.forEach(function(location) {
+            if (location.title.toLowerCase().includes(query)) {
+                results.push(location);
+            }
+        });
+        return results;
     };
 
-    self.searchMarkers = function(){
+    self.updateList = function() {
+        self.clearMarkers();
+        self.results(self.filterLocations());
+        self.setMarkers(self.filterLocations());
+    };
 
+    self.clearMarkers = function() {
+        self.markers().forEach(function (marker) {
+            marker.marker.setVisible(false);
+        });
+    };
+
+    self.setMarkers = function(filterLocations) {
+        filterLocations.forEach(function(location) {
+            var marker = new Marker(location);
+            self.markers.push(marker);
+        });
     };
 }
 
@@ -106,7 +121,7 @@ function initialize() {
     viewModel = new AppViewModel();
 
     viewModel.initMap();
-    viewModel.setMarkers();
+    viewModel.updateList();
 
     ko.applyBindings(viewModel);
 }

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Mumbai | Udacity</title>
+    <title>Mumbai |Udacity</title>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="static/style.css">
@@ -11,7 +11,7 @@
         <div class="sidebar-header">
             <h1>Locations in Mumbai</h1>
             <div class="places-list">
-                <input class="search-input" placeholder="Search for places" type="text" data-bind="value: query, valueUpdate: 'keyup'">
+                <input class="search-input" placeholder="Search for places" type="text" data-bind="textInput: query, event: {input: updateList}">
             </div>
             <ul class="places-list" data-bind="template: {name: 'marker', foreach: locations}">
             </ul>
@@ -28,7 +28,7 @@
     </script>
 
     <script type='text/javascript' src='static/js/knockout-3.4.2.debug.js'></script>
-    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script type='text/javascript' src='static/js/jquery.js'></script>
     <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBiVgu3IDJwokTjzXGe-z-iszUlxrlpnpk&v=3&callback=initialize">
     </script>
