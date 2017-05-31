@@ -9,11 +9,13 @@
     <script type='text/javascript' src='static/js/jquery.js'></script>
 </head>
 <body>
+
     <div class="responsive-header hide">
         <h2>Mumbai</h2>
         <button class="hamburger">&#9776;</button>
         <button class="cross hide">&#735;</button>
     </div>
+
     <div class="sidebar">
         <section class="locations-container">
             <div class="sidebar-header">
@@ -27,29 +29,37 @@
             </div>
         </section>
     </div>
+
     <section class="map-container">
         <div id="map"></div>
     </section>
 
-
+    <!-- script to make page responsive -->
     <script type="text/javascript">
         function mediaSize() {
+
+            // condition for smaller screens to keep the page responsive
             if (window.matchMedia('(max-width: 767px)').matches) {
                 $('.sidebar').addClass('hide');
                 $('.responsive-header').removeClass('hide');
 
+                //hamburger icon to open the locations list
                 $('.hamburger').click(function(){
                     $('#map').css('left','360px');
                     $('.hamburger').addClass('hide');
                     $('.cross').removeClass('hide');
                 });
 
+                //cross icon to close the locations list
                 $('.cross').click(function(){
                     $('#map').css('left','0px');
                     $('.hamburger').removeClass('hide');
                     $('.cross').addClass('hide');
                 });
-            }else{
+            }
+
+            // bring back to default design when window size increases
+            else{
                 $('.sidebar').addClass('show');
                 $('.responsive-header').addClass('hide');
             }
@@ -57,11 +67,12 @@
         window.addEventListener('resize', mediaSize, false);
     </script>
 
+    <!-- script that links marker to it's location from the location list -->
     <script type="text/html" id="marker">
         <div data-bind="visible: visible">
-                <li data-bind="attr: {id: id}">
-                    <strong class="location-name" data-bind="text: title, click: $parent.populateInfoWindow"></strong>
-                </li>
+            <li data-bind="attr: {id: id}">
+                <strong class="location-name" data-bind="text: title, click: $parent.populateInfoWindow"></strong>
+            </li>
         </div>
     </script>
 

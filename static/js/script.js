@@ -1,3 +1,4 @@
+// Data of different locations being marked on the map
 var locations = [
     {
         title: 'IIT Bombay',
@@ -82,6 +83,7 @@ var locations = [
 var largeInfowindow;
 var map;
 
+// Marker class that initializes the marker with it's data.
 var Marker = function(location) {
     var position = location.position;
     var title = location.title;
@@ -95,6 +97,7 @@ var Marker = function(location) {
                     id: id
                 });
 
+    // function that opens infowindow when clicked on that particular marker
     google.maps.event.addListener(this.marker, 'click', function() {
         largeInfowindow.setContent('<div>' + this.title + this.position + '</div>');
         largeInfowindow.open(map, this);
@@ -111,12 +114,14 @@ function AppViewModel() {
     self.results = ko.observableArray([]);
     largeInfowindow = new google.maps.InfoWindow();
 
+    // initMap function initializes the map on page load.
     self.initMap = function() {
         map = new google.maps.Map(document.getElementById('map'), {
             center: {lat: 19.1493839, lng: 72.9238321},
             zoom: 11
         });
 
+        // Event listener function centers the map when window resizes
         google.maps.event.addDomListener(window, "resize", function() {
             var center = map.getCenter();
             google.maps.event.trigger(map, "resize");
@@ -124,6 +129,8 @@ function AppViewModel() {
         });
     };
 
+    // This function opens the infowindow on clicking the marker by populating it with
+    // the title and position
     self.populateInfoWindow = function() {
         var marker = self.markers()[this.id - 1].marker;
         largeInfowindow.setContent('<div>' + marker.title + marker.position + '</div>');
@@ -133,6 +140,7 @@ function AppViewModel() {
         });
     };
 
+    // filterLocations function filters the markers based on the search input given
     self.filterLocations = function() {
         var results = [];
         var query = self.query().toLowerCase();
@@ -144,18 +152,23 @@ function AppViewModel() {
         return results;
     };
 
+    // updateList function updates the locations list and set Markers on the map when the
+    // page loads. Also, updates the list whenever search is done
     self.updateList = function() {
         self.clearMarkers();
         self.results(self.filterLocations());
         self.setMarkers(self.filterLocations());
     };
 
+    // clearMarkers erases the markers on the map to trigger search query
     self.clearMarkers = function() {
         self.markers().forEach(function (marker) {
             marker.marker.setVisible(false);
         });
     };
 
+    // setMarkers creates marker instances for every location when the page loads and
+    // when the search is processed.
     self.setMarkers = function(filterLocations) {
         filterLocations.forEach(function(location) {
             var marker = new Marker(location);
@@ -164,6 +177,7 @@ function AppViewModel() {
     };
 }
 
+// function that alerts the error message when map doesn't load
 function googleError() {
     alert("Failed to load Google Maps API");
 }
