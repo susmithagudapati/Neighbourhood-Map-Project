@@ -116,6 +116,12 @@ function AppViewModel() {
             center: {lat: 19.1493839, lng: 72.9238321},
             zoom: 11
         });
+
+        google.maps.event.addDomListener(window, "resize", function() {
+            var center = map.getCenter();
+            google.maps.event.trigger(map, "resize");
+            map.setCenter(center);
+        });
     };
 
     self.populateInfoWindow = function() {
@@ -173,8 +179,3 @@ function initialize() {
 
     ko.applyBindings(viewModel);
 }
-
-
-
-
-

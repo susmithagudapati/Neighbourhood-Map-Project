@@ -8,7 +8,7 @@ body {
     height: 100%;
 }
 
-.content {
+.sidebar {
     height: 100%;
     background-color: black;
 }
@@ -19,12 +19,43 @@ body {
     position: relative;
 }
 
-#map {
-    height: 100%;
-    position: absolute;
-    left: 320px;
-    right: 0px;
-    bottom: 0px;
+.responsive-header{
+    width:100%;
+    height:64px;
+    background-color: black;
+    border-bottom:1px solid #dddddd;
+}
+
+.hamburger {
+    background:none;
+    position:absolute;
+    top:0;
+    left:0;
+    line-height:45px;
+    padding:5px 15px 0px 15px;
+    color:#999;
+    border:0;
+    font-size:1.4em;
+    font-weight:bold;
+    cursor:pointer;
+    outline:none;
+    z-index:10000000000000;
+}
+
+.cross {
+    background:none;
+    position:absolute;
+    top:0;
+    left:0;
+    line-height:45px;
+    padding:5px 15px 0px 15px;
+    color:#999;
+    border:0;
+    font-size: 3em;
+    font-weight:bold;
+    cursor:pointer;
+    outline:none;
+    z-index:10000000000000;
 }
 
 h1 {
@@ -32,6 +63,22 @@ h1 {
     margin: auto;
     padding: 30px 15px;
     font-size: 28px;
+}
+
+h2 {
+    color: white;
+    font-size: 28px;
+    margin: auto;
+    float: right;
+    padding: 15px;
+}
+
+#map {
+    height: 100%;
+    position: absolute;
+    left: 320px;
+    right: 0px;
+    bottom: 0px;
 }
 
 .search-input {
@@ -47,4 +94,11 @@ h1 {
     color: white;
     margin-left: 25px;
     margin-top: 20px;
+}
+
+@media (max-width: 767px) {
+    #map {
+        top: 64px;
+        left: 0px;
+    }
 }
