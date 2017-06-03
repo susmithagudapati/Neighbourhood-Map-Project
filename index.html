@@ -4,9 +4,8 @@
     <title>Mumbai |Udacity</title>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="static/bootstrap-full.css">
-    <link rel="stylesheet" type="text/css" href="static/style.css">
-    <script type='text/javascript' src='static/js/jquery.js'></script>
+    <link rel="stylesheet" href="static/bootstrap-full.css">
+    <link rel="stylesheet" href="static/style.css">
 </head>
 <body>
 
@@ -34,39 +33,6 @@
         <div id="map"></div>
     </section>
 
-    <!-- script to make page responsive -->
-    <script type="text/javascript">
-        function mediaSize() {
-
-            // condition for smaller screens to keep the page responsive
-            if (window.matchMedia('(max-width: 767px)').matches) {
-                $('.sidebar').addClass('hide');
-                $('.responsive-header').removeClass('hide');
-
-                //hamburger icon to open the locations list
-                $('.hamburger').click(function(){
-                    $('#map').css('left','360px');
-                    $('.hamburger').addClass('hide');
-                    $('.cross').removeClass('hide');
-                });
-
-                //cross icon to close the locations list
-                $('.cross').click(function(){
-                    $('#map').css('left','0px');
-                    $('.hamburger').removeClass('hide');
-                    $('.cross').addClass('hide');
-                });
-            }
-
-            // bring back to default design when window size increases
-            else{
-                $('.sidebar').addClass('show');
-                $('.responsive-header').addClass('hide');
-            }
-        }
-        window.addEventListener('resize', mediaSize, false);
-    </script>
-
     <!-- script that links marker to it's location from the location list -->
     <script type="text/html" id="marker">
         <div data-bind="visible: visible">
@@ -76,10 +42,11 @@
         </div>
     </script>
 
-    <script type='text/javascript' src='static/js/knockout-3.4.2.debug.js'></script>
-    <script async defer
+    <script src='static/js/knockout-3.4.2.debug.js'></script>
+    <script src='static/js/jquery.js'></script>
+    <script src="static/js/script.js" ></script>
+    <script async defer onerror="googleError()"
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBiVgu3IDJwokTjzXGe-z-iszUlxrlpnpk&v=3&callback=initialize">
     </script>
-    <script type="text/javascript" src="static/js/script.js" ></script>
 </body>
 </html>
