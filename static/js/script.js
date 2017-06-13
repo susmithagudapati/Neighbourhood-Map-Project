@@ -124,7 +124,6 @@ var Marker = function(location, markers) {
         var that = this;
 
         $.getJSON(venueUrl, function(data) {
-            console.log(data);
             data.response.tips.items.forEach(function(item) {
                 topTips.push('<li>' + item.text + '</li>');
             });
@@ -318,4 +317,5 @@ function mediaSize() {
 
 $(document).ready(function() {
     window.addEventListener('resize', mediaSize);
+    mediaSize();
 });
