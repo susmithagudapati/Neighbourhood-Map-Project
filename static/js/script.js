@@ -128,9 +128,9 @@ var Marker = function(location, markers) {
                 topTips.push('<li>' + item.text + '</li>');
             });
         }).done(function(){
-            that.content = '<h2>' + that.marker.title + '</h2>' + '<h3>Most Recent Comments</h3>' + '<ol class="tips">' + topTips.join('') + '</ol>';
+            that.content = '<h3>' + that.marker.title + '</h3>' + '<h4>Most Recent Comments</h4>' + '<ol class="tips">' + topTips.join('') + '</ol>';
         }).fail(function(jqXHR, textStatus) {
-            that.content = '<h2>' + that.marker.title + '</h2>' + '<h3>Most Recent Comments</h3>' + '<h4>Oops. There was a problem retrieving this location\'s comments.</h4>';
+            that.content = '<h3>' + that.marker.title + '</h3>' + '<h4>Most Recent Comments</h4>' + '<h4>Oops. There was a problem retrieving this location\'s comments.</h4>';
             console.log('getJSON request failed! ' + textStatus);
         });
     };
@@ -297,12 +297,14 @@ function mediaSize() {
         $('.hamburger').click(function(){
             $('#map').css('left','360px');
             $('.hamburger').addClass('hide');
+            $('.sidebar').addClass('show');
             $('.cross').removeClass('hide');
         });
 
         //cross icon to close the locations list
         $('.cross').click(function(){
             $('#map').css('left','0px');
+            $('.sidebar').addClass('hide');
             $('.hamburger').removeClass('hide');
             $('.cross').addClass('hide');
         });
